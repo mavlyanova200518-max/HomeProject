@@ -39,7 +39,28 @@ protected:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
     UInputAction* LookAction;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+    class UInputAction* IA_Crouch;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+    class UInputAction* IA_Jump;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+    class UInputAction* IA_Sprint;
+
+    // Переменная, которая позволит выбирать класс оружия в свойствах блюпринта
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")
+    TSubclassOf<class AWeaponActor> DefaultWeaponClass;
+
+    // Ссылка на уже созданное в игре оружие
+    UPROPERTY()
+    class AWeaponActor* CurrentWeapon;
+
     // --- Функции управления ---
     void Move(const FInputActionValue& Value);
     void Look(const FInputActionValue& Value);
+    void StartCrouching();
+    void StopCrouching();
+    void StartSprint();
+    void StopSprint();
 };
