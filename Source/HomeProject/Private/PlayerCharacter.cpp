@@ -141,3 +141,27 @@ void APlayerCharacter::SpawnModuleActor()
 
     GetWorld()->SpawnActor<AModuleTestActor>(AModuleTestActor::StaticClass(), SpawnLocation, SpawnRotation);
 }
+
+void APlayerCharacter::PlayReloadAnim()
+{
+    if (ReloadMontage)
+    {
+        PlayAnimMontage(ReloadMontage, 1.0f);
+    }
+}
+
+void APlayerCharacter::PlayHitAnim()
+{
+    if (HitMontage)
+    {
+        PlayAnimMontage(HitMontage, 1.0f);
+    }
+}
+
+void APlayerCharacter::PlayInteractAnim()
+{
+    if (InteractMontage)
+    {
+        PlayAnimMontage(InteractMontage, 1.0f);
+    }
+}

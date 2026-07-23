@@ -20,6 +20,24 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Testing")
     void SpawnModuleActor();
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animations")
+    UAnimMontage* ReloadMontage;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animations")
+    UAnimMontage* HitMontage;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animations")
+    UAnimMontage* InteractMontage;
+
+    UFUNCTION(BlueprintCallable, Category = "Animations")
+    void PlayReloadAnim();
+
+    UFUNCTION(BlueprintCallable, Category = "Animations")
+    void PlayHitAnim();
+
+    UFUNCTION(BlueprintCallable, Category = "Animations")
+    void PlayInteractAnim();
+
 protected:
     virtual void BeginPlay() override;
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
