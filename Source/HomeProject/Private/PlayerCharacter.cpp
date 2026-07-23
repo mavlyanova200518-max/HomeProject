@@ -5,6 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "WeaponActor.h"
+#include "TestModule/ModuleTestActor.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -131,4 +132,12 @@ void APlayerCharacter::StopSprint()
 {
     // Возвращаем стандартную скорость
     GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+}
+
+void APlayerCharacter::SpawnModuleActor()
+{
+    FVector SpawnLocation = GetActorLocation() + GetActorForwardVector() * 200.0f;
+    FRotator SpawnRotation = GetActorRotation();
+
+    GetWorld()->SpawnActor<AModuleTestActor>(AModuleTestActor::StaticClass(), SpawnLocation, SpawnRotation);
 }

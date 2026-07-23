@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "HomeProject.h"
+#include "../TestModule/ModuleTestActor.h"
 
 AHomeProjectCharacter::AHomeProjectCharacter()
 {
@@ -130,4 +131,14 @@ void AHomeProjectCharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void AHomeProjectCharacter::SpawnModuleActor()
+{
+    // Вычисляем точку: позиция персонажа + 200 сантиметров вперед
+    FVector SpawnLocation = GetActorLocation() + GetActorForwardVector() * 200.0f;
+    FRotator SpawnRotation = GetActorRotation();
+
+    // Даем команду движку заспавнить актора
+    GetWorld()->SpawnActor<AModuleTestActor>(AModuleTestActor::StaticClass(), SpawnLocation, SpawnRotation);
 }

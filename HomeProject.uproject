@@ -13,6 +13,14 @@
 				"AIModule",
 				"UMG"
 			]
+		},
+		{
+			"Name": "TestModule",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	],
 	"Plugins": [

@@ -17,6 +17,8 @@ class HOMEPROJECT_API APlayerCharacter : public ABaseCharacter
 
 public:
     APlayerCharacter();
+    UFUNCTION(BlueprintCallable, Category = "Testing")
+    void SpawnModuleActor();
 
 protected:
     virtual void BeginPlay() override;

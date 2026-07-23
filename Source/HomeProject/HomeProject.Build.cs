@@ -21,7 +21,8 @@ public class HomeProject : ModuleRules
 			"Slate",
 			"GameplayAbilities",
 			"GameplayTags",
-			"GameplayTasks"
+			"GameplayTasks",
+            "TestModule"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });

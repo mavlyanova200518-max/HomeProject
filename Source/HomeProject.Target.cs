@@ -11,5 +11,6 @@ public class HomeProjectTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V6;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_7;
 		ExtraModuleNames.Add("HomeProject");
+		ExtraModuleNames.Add("TestModule");
 	}
 }
