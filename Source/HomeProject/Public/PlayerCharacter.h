@@ -9,6 +9,8 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
+class UNiagaraSystem;
+class UMetaSoundSource;
 
 UCLASS()
 class HOMEPROJECT_API APlayerCharacter : public ABaseCharacter
@@ -37,6 +39,14 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "Animations")
     void PlayInteractAnim();
+
+    // Слот эффекта NS_BulletImpact
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX|Weapons")
+    UNiagaraSystem* BulletImpactVFX;
+
+    // Функция выстрела
+    UFUNCTION(BlueprintCallable, Category = "Weapons")
+    void FireWeapon();
 
 protected:
     virtual void BeginPlay() override;
@@ -67,6 +77,9 @@ protected:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
     class UInputAction* IA_Sprint;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Audio|Ambient")
+    class USoundBase* DesertWindSound;
 
     // Переменная, которая позволит выбирать класс оружия в свойствах блюпринта
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon")

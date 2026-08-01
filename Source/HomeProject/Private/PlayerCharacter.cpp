@@ -6,6 +6,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "WeaponActor.h"
 #include "TestModule/ModuleTestActor.h"
+#include "NiagaraFunctionLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "Components/AudioComponent.h"
+#include "Sound/SoundBase.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -60,6 +64,23 @@ void APlayerCharacter::BeginPlay()
         {
             // Прикрепляем оружие к мешу персонажа в сокет правой руки "hand_rSocket"
             CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("hand_rSocket"));
+        }
+    }
+
+    // Запускаем фоновый звук ветра с плавным нарастанием (Fade In)
+    if (DesertWindSound)
+    {
+        UAudioComponent* WindAudioComponent = UGameplayStatics::SpawnSound2D(
+            GetWorld(),
+            DesertWindSound,
+            1.0f, // Громкость
+            1.0f, // Питч
+            0.0f  // Время старта
+        );
+
+        if (WindAudioComponent)
+        {
+            WindAudioComponent->FadeIn(3.0f, 1.0f);
         }
     }
 }
@@ -165,3 +186,38 @@ void APlayerCharacter::PlayInteractAnim()
         PlayAnimMontage(InteractMontage, 1.0f);
     }
 }
+
+void APlayerCharacter::FireWeapon()
+{
+    FVector StartLocation = GetActorLocation();
+    FVector ForwardVector = GetActorForwardVector();
+    FVector EndLocation = StartLocation + (ForwardVector * 5000.0f);
+
+    FHitResult HitResult;
+    FCollisionQueryParams CollisionParams;
+    CollisionParams.AddIgnoredActor(this);
+
+    bool bHit = GetWorld()->LineTraceSingleByChannel(
+        HitResult,
+        StartLocation,
+        EndLocation,
+        ECC_Visibility,
+        CollisionParams
+    );
+
+    if (bHit && BulletImpactVFX)
+    {
+        UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+            GetWorld(),
+            BulletImpactVFX,
+            HitResult.ImpactPoint,
+            HitResult.ImpactNormal.Rotation(),
+            FVector(1.0f),
+            true,
+            true,
+            ENCPoolMethod::AutoRelease,
+            true
+        );
+    }
+}
+

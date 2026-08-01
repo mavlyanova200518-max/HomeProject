@@ -22,8 +22,11 @@ public class HomeProject : ModuleRules
 			"GameplayAbilities",
 			"GameplayTags",
 			"GameplayTasks",
-            "TestModule"
-		});
+            "TestModule",
+            "Niagara",
+            "MetasoundEngine", 
+            "AudioExtensions"
+        });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 

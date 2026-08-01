@@ -54,6 +54,7 @@ public:
 	/** Constructor */
 	AHomeProjectCharacter();	
 
+
 protected:
 
 	/** Initialize input action bindings */
