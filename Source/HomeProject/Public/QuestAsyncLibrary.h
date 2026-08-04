@@ -6,9 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "QuestAsyncLibrary.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class HOMEPROJECT_API UQuestAsyncLibrary : public UBlueprintFunctionLibrary
 {
